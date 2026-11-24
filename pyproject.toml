@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plmorph"
+version = "0.0.1"
+description = "Exciton-ruler inversion: transition-energy distributions to nanocrystal morphology distributions"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.26", "scipy>=1.11", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5"]
+autodiff = ["jax[cpu]>=0.4.30", "optax>=0.2"]
+solvers = ["cma>=3.3"]
+bayes = ["numpyro>=0.15"]
+
+[tool.setuptools.packages.find]
+include = ["plmorph*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
