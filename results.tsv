@@ -1,0 +1,10 @@
+time	data	name	k	n	rmse_meV	loo_meV	aicc	held_meV	rules	params
+2026-11-24 11:30	confinement_data.csv	v0 baseline: lateral a_eff = sqrt(xy) + separate thickness term z (E0 fixed)	4	55	15.8	17.1	-447.8	11.3	FAIL	a_lat=1.522, p_lat=1.889, a_z=0.5916, p_z=1.202
+2026-11-24 11:31	confinement_data.csv	M3 exciton-mass crossover (2 parameters)	2	55	20.8	21.5	-421.7	13.1	pass	mu=0.1154, delta=1.289
+2026-11-24 11:31	confinement_data.csv	M2 Kane two-band with effective length and weak long axes	3	55	16.2	17.2	-446.7	9.1	pass	C=4.648, delta=0.9297, w=0.7431
+2026-11-24 11:32	confinement_data.csv	M1 thin-axis power law plus weak long-axis terms	4	55	15.8	16.9	-447.6	11.1	pass	A=0.5903, d0=3.306e-13, p=1.181, B=0.8626
+2026-11-24 11:32	confinement_data.csv	M4 sub-additive edge confinement	4	55	14.7	15.6	-455.6	10.2	pass	A=1.824, d0=0.894, p=1.803, n=1.422
+2026-11-24 11:32	confinement_data.csv	M2 Kane model with equal axis weights	2	55	17.8	18.4	-438.9	13.9	pass	C=3.524, delta=0.6469
+2026-11-24 11:33	confinement_data.csv	M3 exciton-mass crossover with fitted mass ratio	3	55	14.9	15.7	-456.2	9.2	pass	mu=0.1703, delta=0.8543, ratio=1.715
+2026-11-24 12:17	confinement_data.csv	M3 exciton-mass crossover with fitted Bohr radius	3	55	14.3	15.0	-460.6	12.4	pass	mu=0.177, delta=0.7981, aB=1.199
+2026-11-24 12:17	confinement_data.csv	M2 Kane two-band with effective length and weak long axes	3	55	16.2	17.2	-446.7	9.1	pass	C=4.648, delta=0.9297, w=0.7431
