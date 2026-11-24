@@ -12,7 +12,7 @@ import numpy as np
 
 from .grid import EnergyGrid, Grid
 from .maps import BrightnessMap, EnergyMap
-from .populations import Population
+from .populations import Population, density, mixture_density
 
 
 @dataclass
@@ -35,7 +35,26 @@ class BinningOperator:  # INTERFACE
 
     @classmethod
     def build(cls, grid: Grid, egrid: EnergyGrid, e_map: EnergyMap) -> "BinningOperator":
-        raise NotImplementedError
+        x, y, z = grid.mesh()
+        energy = np.asarray(e_map(x, y, z), dtype=np.float64)
+        if energy.shape != grid.shape or not np.all(np.isfinite(energy)):
+            raise ValueError("energy map must return finite values with the grid shape")
+        position = (energy.ravel() - egrid.centers[0]) / egrid.de
+        valid = (position >= 0.0) & (position <= egrid.n_bins - 1)
+        lower = np.floor(position).astype(np.int64)
+        # The final centre is represented by the final pair with upper weight 1.
+        lower = np.clip(lower, 0, egrid.n_bins - 2)
+        w_upper = np.clip(position - lower, 0.0, 1.0).astype(np.float64)
+        w_upper[~valid] = 0.0
+        return cls(
+            grid_shape=grid.shape,
+            n_bins=egrid.n_bins,
+            lower=lower,
+            w_upper=w_upper,
+            valid=valid,
+            map_name=getattr(e_map, "name", type(e_map).__name__),
+            map_version=getattr(e_map, "version", ""),
+        )
 
     @property
     def n_out_of_range(self) -> int:
@@ -43,11 +62,32 @@ class BinningOperator:  # INTERFACE
 
     def apply(self, W: np.ndarray) -> np.ndarray:
         """(nx, ny, nz) -> (n_bins,). Unnormalized push-forward T W."""
-        raise NotImplementedError
+        weights = np.asarray(W, dtype=np.float64)
+        if weights.shape != self.grid_shape:
+            raise ValueError(f"W must have shape {self.grid_shape}")
+        valid = self.valid
+        flat_weights = weights.ravel()[valid]
+        lower = self.lower[valid]
+        upper_weight = self.w_upper[valid]
+        result = np.bincount(
+            lower, weights=flat_weights * (1.0 - upper_weight), minlength=self.n_bins
+        )
+        result += np.bincount(
+            lower + 1, weights=flat_weights * upper_weight, minlength=self.n_bins
+        )
+        return result.astype(np.float64, copy=False)
 
     def adjoint(self, r: np.ndarray) -> np.ndarray:
         """(n_bins,) -> (nx, ny, nz). T^T r; must satisfy <T W, r> = <W, T^T r>."""
-        raise NotImplementedError
+        residual = np.asarray(r, dtype=np.float64)
+        if residual.shape != (self.n_bins,):
+            raise ValueError(f"r must have shape ({self.n_bins},)")
+        result = np.zeros(int(np.prod(self.grid_shape)), dtype=np.float64)
+        valid = self.valid
+        lower = self.lower[valid]
+        upper_weight = self.w_upper[valid]
+        result[valid] = (1.0 - upper_weight) * residual[lower] + upper_weight * residual[lower + 1]
+        return result.reshape(self.grid_shape)
 
 
 @dataclass
@@ -66,4 +106,31 @@ def forward(
     b_map: BrightnessMap,
 ) -> ForwardResult:  # INTERFACE
     """P -> W = P * B -> p(E) = normalize(T W). Also returns per-population components."""
-    raise NotImplementedError
+    if T.grid_shape != grid.shape or T.n_bins != egrid.n_bins:
+        raise ValueError("binning operator does not match the supplied grids")
+    if not pops:
+        raise ValueError("at least one population is required")
+    probability = mixture_density(pops, grid)
+    x, y, z = grid.mesh()
+    brightness = np.asarray(b_map(x, y, z), dtype=np.float64)
+    if brightness.shape != grid.shape or not np.all(np.isfinite(brightness)):
+        raise ValueError("brightness map must return finite values with the grid shape")
+    if np.any(brightness < 0):
+        raise ValueError("brightness map must be nonnegative")
+
+    weighted_probability = probability * brightness
+    raw_total = T.apply(weighted_probability)
+    norm = raw_total.sum(dtype=np.float64) * egrid.de
+    if not np.isfinite(norm) or norm <= 0:
+        raise ValueError("forward spectrum has no positive in-range brightness")
+    components = np.empty((len(pops), egrid.n_bins), dtype=np.float64)
+    for index, pop in enumerate(pops):
+        pop_probability, _ = density(pop, grid)
+        components[index] = T.apply(pop.weight * pop_probability * brightness) / norm
+    p = raw_total / norm
+    return ForwardResult(
+        p=p,
+        components=components,
+        W=weighted_probability,
+        n_out_of_range=T.n_out_of_range,
+    )

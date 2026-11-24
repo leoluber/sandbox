@@ -1,0 +1,29 @@
+{
+  "brightness_map": "unit",
+  "energy_de_ev": 0.001,
+  "energy_e_max_ev": 3.2,
+  "energy_e_min_ev": 2.35,
+  "energy_map": "v1",
+  "energy_map_version": "1.0 (2026-11-24)",
+  "grid_n_max": 50,
+  "grid_n_min": 2,
+  "library_names": [
+    "cube_6",
+    "cube_10",
+    "cube_15",
+    "cube_25",
+    "npl_2ML_L30",
+    "npl_3ML_L20",
+    "npl_4ML_L40",
+    "npl_3ML_rect",
+    "edge_narrow",
+    "edge_broad",
+    "edge_large"
+  ],
+  "pipeline_population": "npl_3ML_L20",
+  "sparse_operator_storage": [
+    "lower",
+    "w_upper",
+    "valid"
+  ]
+}
