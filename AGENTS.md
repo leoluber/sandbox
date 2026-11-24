@@ -2,6 +2,24 @@
 
 Read `SPEC.md`, `TASKS.md` and `DECISIONS.md` before starting any work. `PLAN.md` and `LeosNotes.md` give background.
 
+
+## Python Environment
+The project uses the Conda environment:
+
+C:\Users\leolu\miniconda3\envs\research
+
+IMPORTANT: Always execute Python through conda run -p to ensure the environment and its DLL dependencies are correctly loaded.
+
+Example:
+
+conda run -p "C:\Users\leolu\miniconda3\envs\research" python script.py
+
+For package installation:
+
+conda install -p "C:\Users\leolu\miniconda3\envs\research" PACKAGE
+
+Never launch the environment's python.exe directly. Never use system Python or the VS Code Python runner.
+
 ## What you may and may not edit
 
 | May edit | Must NOT edit |
