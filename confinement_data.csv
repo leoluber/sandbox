@@ -1,0 +1,70 @@
+z(nm);x(nm);y(nm);E(eV);no
+1.77;5.3;5.3;2.719;nina 3ML 
+1.77;12.2;12.2;2.695;nina 3ML issue
+1.77;20.2;20.2;2.684;nina 3ML 
+1.77;9.8;9.8;2.692;10 nina
+1.77;8.3;8.3;2.695;14 nina
+1.77;16;16;2.689;PL02P issue
+1.77;8.9;10.5;2.711;jp82_24h issue
+1.77;10;10.5;2.703;jp169_96 issue
+1.77;7.4;8.2;2.713;jp201_1h issue
+1.77;8.1;8.6;2.709;jp201_72h issue
+1.77;10;9;2.699;jp137_5d issue
+1.77;12;9.7;2.699;jp137_22d issue
+1.77;6.8;7.5;2.713;jp142_48h issue
+1.18;8.5;8.5;2.883;jp160
+1.18;11.1;11.1;2.883;jp165
+1.18;15.6;15.6;2.870;frank et al
+1.18;22.7;22.7;2.863;frank et al
+1.18;27.1;27.1;2.857;frank et al issue
+1.18;75;75;2.875;jp191 issue
+1.18;400;400;2.839;jp194 issue
+1.18;60;60;2.863;jp197 issue
+1.18;53.5;53.5;2.844;frank et al issue
+2.36;4.7;4.7;2.650;JP 65
+2.36;6;6;2.630;synth nina
+2.36;15;8.8;2.610;synth joni
+2.36;23.6;13.2;2.601;LL28
+2.36;21;10.5;2.603;LL23
+2.36;17;11.7;2.603;LL53
+14;14;14;2.393;Raino et al. foreign
+7;7;7;2.441;Raino et al. foreign
+4.5;4.5;4.5;2.585;Raino et al. foreign
+9.3;9.3;9.3;2.461;Kline et al. foreign
+3.9;3.9;3.9;2.649;Cheng et al. foreign
+4.7;4.7;4.7;2.563;Cheng et al. foreign
+5.3;5.3;5.3;2.537;Cheng et al. foreign
+6.3;6.3;6.3;2.497;Cheng et al. foreign
+6.1;6.1;6.1;2.502;Li et al. foreign
+9.4;9.4;9.4;2.414;Li et al. foreign
+12.1;12.1;12.1;2.390;Li et al. foreign
+100;100;100;2.377;agu special
+18;18;18;2.403;agu PG161 leoeval
+15;15;15;2.407;agu
+13.4;13.4;13.4;2.408;agu NH68 leoeval
+10.4;10.4;10.4;2.417;agu NH61 leoeval
+10;10;10;2.426;agu
+9.9;9.9;9.9;2.454;agu 309 leoeval
+8.8;8.8;8.8;2.431;Bodnarchuk et al
+8.7;8.7;8.7;2.441;agu
+7.2;7.2;7.2;2.475;agu leoeval
+6.7;6.7;6.7;2.510;agu leoeval
+6.3;6.3;6.3;2.475;agu
+6.15;6.15;6.15;2.505;agu 308 leoeval
+5.5;5.5;5.5;2.490;Bodnarchuk et al
+5.4;5.4;5.4;2.505;agu
+4.3;4.3;4.3;2.562;agu
+3.1;3.1;3.1;2.680;Akkerman et al. sphere
+3.5;3.5;3.5;2.672;Liu et al.
+3.9;3.9;3.9;2.616;Liu et al.
+4.9;4.9;4.9;2.562;Liu et al.
+5.7;5.7;5.7;2.510;Liu et al.
+10;10;10;2.413;Akkermann22
+13;13;13;2.403;Akkermann22
+3.1;3.1;3.1;2.687;Akkermann22
+4;4;4;2.598;Akkermann22
+5;5;5;2.530;Akkermann22
+6.1;6.1;6.1;2.481;Akkermann22
+6.8;6.8;6.8;2.471;Akkermann22
+7.9;7.9;7.9;2.443;Akkermann22
+9.2;9.2;9.2;2.422;Akkermann22
