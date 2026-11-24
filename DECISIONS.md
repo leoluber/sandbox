@@ -18,5 +18,5 @@ Format: `date — decision (status)`. Status: **confirmed** or *provisional* (op
 - 2026-11-24 — NPL = one integer ML in z (σ_z ignored); 2D normal over (x, y). *provisional*
 - 2026-11-24 — Only diagonal covariances in phase 1 (corr = identity). *provisional*
 - 2026-11-24 — Energy grid 2.35–3.20 eV, 1 meV bins. *provisional*
-- 2026-11-24 — The toy E_map is a placeholder until the morphPL-sandbox mapping is placed in `legacy/`. *provisional*
+- 2026-11-24 — E_map v1 = f(d₁) + g(d₂, d₃) with A = 1.329, d₀ = 0.955 nm, p = 1.457, b = 0.5 eV·nm² (fixed). Joint fit to plates 1–4 ML and the own cube trend (xyzPL analysis); free b gives 0.48, which confirms 0.5. Largest miss: 2 ML (−10 %). *provisional until the database calibration*
 - 2026-11-24 — Figure style: Nature-family widths (89/120/183 mm), 7 pt. *provisional*

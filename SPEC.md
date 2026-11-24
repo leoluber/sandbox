@@ -14,7 +14,8 @@
 - `EnergyMap(x, y, z) -> E` (eV), elementwise on arrays of any shape. It **must be symmetric under any permutation of (x, y, z)** and satisfy E ≥ E0.
 - `BrightnessMap(x, y, z) -> B ≥ 0`. Default: `unit_brightness` (B = 1).
 - Maps carry `name` and `version`. Get them through `get_energy_map(name)` / `get_brightness_map(name)`.
-- v1 form: `ΔE = f(d₁) + g(d₂, d₃)` with sorted edges d₁ ≤ d₂ ≤ d₃. The `toy` map is a placeholder until the `morphPL-sandbox` mapping is copied into `legacy/` and wrapped.
+- **Default `v1`** (`ConfinementMapV1`): `ΔE = A/(d₁+d₀)^p + b(1/d₂² + 1/d₃²)`, edges sorted d₁ ≤ d₂ ≤ d₃ in nm, A = 1.329 eV·nm^p, d₀ = 0.955 nm, p = 1.457, b = 0.5 eV·nm² per edge. Fitted jointly to the plate values (1–4 ML) and the own cube trend from `xyzPL_confinement_mapping.md`. Emission mapping (Stokes shift included).
+- `toy`: an uncalibrated second map, used only to test that maps can be swapped.
 
 ## 4. Forward operator (`plmorph/forward.py`)
 1. `W = P ⊙ B`, shape `(nx, ny, nz)`.

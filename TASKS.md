@@ -11,7 +11,7 @@ Acceptance tests for M3 and later are written together with the human before tho
 
 ## M1 — Grid and maps
 - Finish `grid.py` and `maps.py`. The toy map must be symmetric under permutations and satisfy E ≥ E0.
-- Wrap the `morphPL-sandbox` mapping from `legacy/` as `E_map` v1 (once it is provided).
+- `E_map` v1 is implemented (`ConfinementMapV1`); the toy map is kept for swap tests. F1 shows v1 with the plate values and the own cube trend overlaid.
 - **Tests:** `tests/acceptance/test_m1_maps.py`
 - **Figures:** **F1** ruler: ΔE over (lateral size, thickness) on log axes with iso-energy contours; the (x, y) plane at fixed z.
 

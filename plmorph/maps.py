@@ -46,14 +46,14 @@ def sorted_edges(x, y, z) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 
 @dataclass(frozen=True)
 class ToyConfinementMap:
-    """Placeholder map: dE = f(d1) + g(d2, d3), with lengths in nm.
+    """Toy map (test fixture only; use "v1" for physics): dE = f(d1) + g(d2, d3), with lengths in nm.
 
     f(d) = A / (d + d0)**p         strongly confined thinnest edge
     g    = c * (1/d2**2 + 1/d3**2) weak lateral (centre-of-mass-like) term
 
     Rough default parameters: p = 1 with A, d0 matched to the 1 ML and 4 ML plate
     values (672 and 223 meV); c = 0.5 eV nm^2 per edge (xyzPL_confinement_mapping.md).
-    NOT a calibrated mapping. Replace with the morphPL-sandbox mapping (M1).
+    NOT calibrated. Kept as a simple second map for interface and swap tests.
     """
 
     A: float = 0.591   # eV nm^p
@@ -70,6 +70,39 @@ class ToyConfinementMap:
 
 
 @dataclass(frozen=True)
+class ConfinementMapV1:
+    """E_map v1 (CsPbBr3 PL), from the xyzPL confinement analysis (24 Nov 2026).
+
+    dE = f(d1) + g(d2, d3), with sorted edges d1 <= d2 <= d3 in nm:
+      f(d) = A / (d + d0)**p        thinnest edge, bends at 1-2 ML
+      g    = b * (1/d2**2 + 1/d3**2) weak lateral term (exciton centre-of-mass confinement)
+
+    b = 0.5 eV nm^2 per edge is fixed (plate lateral fit). A, d0 and p are fitted jointly to:
+      - plate dE at large lateral size: 672, 488, 306, 223 meV for 1-4 ML;
+      - own cube trend: dE = 33 meV * (13.4 nm / L)**1.45 for L = 4-20 nm.
+    With b left free, the same joint fit gives b = 0.48, which independently confirms the plate value.
+
+    Fit quality: cubes within ~1 % of the own trend; plates 705 / 440 / 308 / 232 meV
+    (+5 %, -10 %, +1 %, +4 %). 2 ML is the largest miss (the doc flags 1-2 ML as uncertain).
+    Cube/plate ratio at equal thinnest edge is 2.6 / 2.0 / 1.8 / 1.6 for 2-5 ML
+    (doc: 2.8 / 2.45 / 2.2 / 1.9 with extrapolated cubes): the same trend, slightly low.
+    Emission (PL) mapping: the Stokes shift is folded in. Not valid for wires (excluded in phase 1).
+    """
+
+    A: float = 1.329   # eV nm^p
+    d0: float = 0.955  # nm
+    p: float = 1.457
+    b: float = 0.5     # eV nm^2 per lateral edge
+    name: str = "v1"
+    version: str = "1.0 (2026-11-24)"
+
+    def __call__(self, x, y, z) -> np.ndarray:
+        d1, d2, d3 = (d * UNIT_CELL_NM for d in sorted_edges(x, y, z))
+        dE = self.A / (d1 + self.d0) ** self.p + self.b * (1.0 / d2**2 + 1.0 / d3**2)
+        return E0_EV + dE
+
+
+@dataclass(frozen=True)
 class UnitBrightness:
     name: str = "unit"
     version: str = "1"
@@ -78,11 +111,11 @@ class UnitBrightness:
         return np.ones(np.broadcast(x, y, z).shape)
 
 
-_ENERGY_MAPS: dict[str, Callable[[], EnergyMap]] = {"toy": ToyConfinementMap}
+_ENERGY_MAPS: dict[str, Callable[[], EnergyMap]] = {"v1": ConfinementMapV1, "toy": ToyConfinementMap}
 _BRIGHTNESS_MAPS: dict[str, Callable[[], BrightnessMap]] = {"unit": UnitBrightness}
 
 
-def get_energy_map(name: str = "toy") -> EnergyMap:  # INTERFACE
+def get_energy_map(name: str = "v1") -> EnergyMap:  # INTERFACE
     return _ENERGY_MAPS[name]()
 
 
