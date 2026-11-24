@@ -12,6 +12,5 @@ Start here:
 - `figures/GALLERY.md`: current figures at a glance
 
 ```bash
-pip install -e ".[dev]"
-pytest tests/acceptance -k m0
+conda run -p "C:\Users\leolu\miniconda3\envs\research" python -m pytest tests/acceptance -k m0
 ```

@@ -4,6 +4,11 @@ Rules: read data from results/ only (never run solvers here), use plmorph.viz.st
 save via savefig(), then add a line to figures/GALLERY.md.
 """
 
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # repo root; no install needed
+
 import matplotlib.pyplot as plt
 import numpy as np
 

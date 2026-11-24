@@ -7,4 +7,6 @@ One script (and optional JSON config) per experiment, named by milestone, for ex
 - `m5_hparam_search.py`: losses × solvers × settings (D4)
 - `m6_mixtures.py`: 2- and 3-population systems (D5)
 
+Scripts start with `sys.path.insert(0, str(Path(__file__).resolve().parents[1]))` so `plmorph` imports without installing.
+
 Each run writes `results/<milestone>/<run_id>/config.json` plus `data.npz` via `plmorph.io.save_run`. Seeds go in the config.

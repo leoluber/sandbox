@@ -40,7 +40,7 @@ Never launch the environment's python.exe directly. Never use system Python or t
    - the figures listed for that milestone in `TASKS.md` exist in `figures/out/` and are listed in `figures/GALLERY.md`;
    - a `RESULTS.md` entry is written using the template.
 3. Never weaken, skip or `xfail` an acceptance test. If you think a test is wrong, say so in `RESULTS.md`.
-4. Commit after each milestone with the message `MN: <short summary>`.
+4. **Do not run any git commands** (no add, commit, push, branch). The user reviews and commits. At the end of a milestone, suggest a one-line commit message at the bottom of your `RESULTS.md` entry.
 
 ## Code conventions
 
@@ -71,9 +71,11 @@ Interface proposals: <none | short proposal>
 
 ## Commands
 
-```bash
-pip install -e ".[dev]"            # once
-pytest tests/acceptance -k m1      # acceptance tests for one milestone
-pytest tests/unit                  # your own tests
-python figures/scripts/fig_f1_ruler.py
+PowerShell, always from the repo root, always via `conda run -p` (see "Python Environment"). Nothing needs installing: pytest finds `plmorph` through `pythonpath = ["."]` in `pyproject.toml`, and every script in `experiments/` and `figures/scripts/` starts with `sys.path.insert(0, <repo root>)` (see `figures/scripts/fig_template.py`). Do not run `pip install -e .`.
+
+```powershell
+conda run -p "C:\Users\leolu\miniconda3\envs\research" python -m pytest tests/acceptance -k m1   # acceptance tests for one milestone
+conda run -p "C:\Users\leolu\miniconda3\envs\research" python -m pytest tests/unit               # your own tests
+conda run -p "C:\Users\leolu\miniconda3\envs\research" python experiments/run_m1_map.py
+conda run -p "C:\Users\leolu\miniconda3\envs\research" python figures/scripts/fig_f1_ruler.py
 ```
