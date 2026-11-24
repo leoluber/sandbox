@@ -1,0 +1,10 @@
+Read AGENTS.md, SPEC.md, TASKS.md and DECISIONS.md first.
+Do milestones M0 and M1 only, then stop.
+- Install with: pip install -e ".[dev]"
+- Done = pytest tests/acceptance -k "m0 or m1" passes, figure F1 is in
+  figures/out and listed in figures/GALLERY.md, and a RESULTS.md entry
+  is written for each milestone.
+- Do not edit tests/acceptance, SPEC.md, DECISIONS.md or any # INTERFACE
+  signature. If something seems wrong there, write it under
+  "Interface proposals" in RESULTS.md instead.
+- Commit after each milestone ("M0: ...", "M1: ...").
