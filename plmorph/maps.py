@@ -1,4 +1,4 @@
-"""Physics maps on the morphology grid: transition energy and brightness. See SPEC §3.
+"""Physics maps on the morphology grid: transition energy and brightness. See README §3.
 
 Maps are swappable: callers only use the ``EnergyMap`` / ``BrightnessMap`` protocols
 and the registries below.
@@ -13,7 +13,7 @@ import numpy as np
 
 from .grid import UNIT_CELL_NM
 
-E0_EV: float = 2.375  # unconfined level, fixed (DECISIONS.md)
+E0_EV: float = 2.375  # unconfined level, fixed (README §2)
 
 
 class EnergyMap(Protocol):  # INTERFACE

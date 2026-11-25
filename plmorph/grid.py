@@ -1,4 +1,4 @@
-"""Morphology and energy grids. See SPEC §1–2."""
+"""Morphology and energy grids. See README §3."""
 
 from __future__ import annotations
 

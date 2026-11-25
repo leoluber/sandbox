@@ -1,4 +1,4 @@
-"""M2 acceptance tests (LOCKED): populations and forward operator."""
+"""M2 acceptance tests (LOCKED; formerly M2): populations and forward operator."""
 
 import numpy as np
 import pytest

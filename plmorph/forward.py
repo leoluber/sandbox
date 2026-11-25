@@ -1,4 +1,4 @@
-"""Forward operator: morphology distribution -> transition-energy distribution. See SPEC §4.
+"""Forward operator: morphology distribution -> transition-energy distribution. See README §3.
 
 Phase 1: sparse binning operator T (no optical kernel).
 Later: K = T * GaLa, with the same interface.

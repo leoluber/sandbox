@@ -1,4 +1,4 @@
-"""M1 acceptance tests (LOCKED). Run against every registered energy map."""
+"""M1 acceptance tests (LOCKED; formerly M1). Run against every registered energy map."""
 
 import itertools
 

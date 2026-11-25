@@ -1,4 +1,4 @@
-"""Population models on the morphology grid. See SPEC §5."""
+"""Population models on the morphology grid. See README §3."""
 
 from __future__ import annotations
 
@@ -249,7 +249,7 @@ def _pop(kind: Kind, mean, rel_sigma, label: str) -> Population:
     return Population(kind, np.asarray(mean, float), np.asarray(rel_sigma, float), label=label)
 
 
-# D1 library: first proposal (PLAN.md §6). Thickness on z for NPLs.
+# D1 library. Thickness on z for NPLs.
 LIBRARY: dict[str, Population] = {
     "cube_6": _pop("isotropic", [6, 6, 6], [0.10] * 3, "cube 6 uc"),
     "cube_10": _pop("isotropic", [10, 10, 10], [0.10] * 3, "cube 10 uc"),
