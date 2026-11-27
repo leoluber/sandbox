@@ -22,7 +22,7 @@ def binning(E):
 
 
 def test_binning_conserves_mass(binning):
-    P = EXAMPLES["cube 10 nm"].density(GRID)
+    P = EXAMPLES["cube 10 nm"][0].density(GRID)
     inside = ~binning.outside.reshape(GRID.shape)
     assert abs(binning.apply(P).sum() - P[inside].sum()) < 1e-10
 
