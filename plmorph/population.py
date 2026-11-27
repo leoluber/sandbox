@@ -12,10 +12,8 @@ Two kinds:
 
 from dataclasses import dataclass
 from typing import Literal
-
 import numpy as np
 from scipy.special import ndtr
-
 from .grid import Grid
 
 

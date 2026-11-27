@@ -5,7 +5,6 @@
 """
 
 from dataclasses import dataclass
-
 import numpy as np
 
 
@@ -35,8 +34,8 @@ class Grid:
 class EnergyGrid:
     """Uniform energy bins from ``e_min`` to ``e_max`` (eV), spacing ``de``."""
 
-    e_min: float = 2.35
-    e_max: float = 3.20
+    e_min: float = 2.0
+    e_max: float = 3.0
     de: float = 0.001
 
     @property
