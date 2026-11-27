@@ -10,4 +10,5 @@
 6. Python: always `conda run -p "C:\Users\leolu\miniconda3\envs\research" python ...` from the repo
    root. Do not run `pip install -e .`.
 7. Code: type hints, NumPy docstrings with shapes and units, float64, explicit
-   `numpy.random.Generator` seeds, no global state, sparse T only.
+   `numpy.random.Generator` seeds, no global state. Keep it simple: one class or function per
+   step, no protocols, registries or helper layers.

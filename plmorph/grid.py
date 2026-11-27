@@ -1,27 +1,24 @@
-"""Morphology and energy grids. See README §3."""
+"""Step 0: the two grids everything lives on.
 
-from __future__ import annotations
+- ``Grid``: integer edge lengths (x, y, z) in unit cells. Arrays on it have shape (n, n, n).
+- ``EnergyGrid``: energy bin centres in eV.
+"""
 
 from dataclasses import dataclass
 
 import numpy as np
 
-UNIT_CELL_NM: float = 0.59  # CsPbBr3, 1 unit cell = 1 ML
-
 
 @dataclass(frozen=True)
-class Grid:  # INTERFACE
-    """Cubic integer lattice of morphologies (x, y, z) in unit cells.
-
-    Tensors on this grid have shape ``(n, n, n)`` with ``indexing="ij"``.
-    """
+class Grid:
+    """Morphology grid: every edge runs from ``n_min`` to ``n_max`` unit cells."""
 
     n_min: int = 2
     n_max: int = 50
 
     @property
     def axis(self) -> np.ndarray:
-        """Integer edge lengths, shape (n,)."""
+        """Edge lengths in unit cells, shape (n,)."""
         return np.arange(self.n_min, self.n_max + 1)
 
     @property
@@ -30,14 +27,13 @@ class Grid:  # INTERFACE
         return (n, n, n)
 
     def mesh(self) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-        """Return X, Y, Z, each of shape ``self.shape``, in unit cells."""
-        a = self.axis
-        return np.meshgrid(a, a, a, indexing="ij")
+        """X, Y, Z in unit cells, each of shape (n, n, n)."""
+        return np.meshgrid(self.axis, self.axis, self.axis, indexing="ij")
 
 
 @dataclass(frozen=True)
-class EnergyGrid:  # INTERFACE
-    """Uniform energy bins (eV)."""
+class EnergyGrid:
+    """Uniform energy bins from ``e_min`` to ``e_max`` (eV), spacing ``de``."""
 
     e_min: float = 2.35
     e_max: float = 3.20
